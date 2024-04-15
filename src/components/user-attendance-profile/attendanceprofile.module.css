@@ -1,0 +1,150 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 4rem;
+}
+
+@media (max-width: 756px) {
+  .main {
+    padding-top: 2rem;
+  }
+}
+
+.card {
+  max-width: 340px;
+  background-image: url("../../assets/sidebarbg.jpg");
+  padding: 1rem;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userImage {
+  width: 140px;
+  height: 140px;
+}
+
+.img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  outline: 1px solid #828282;
+  outline-offset: 2px;
+}
+
+.name {
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  color: #ccc;
+  height: 20px;
+}
+
+.attendanceControl {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  justify-content: space-between;
+  width: 100%;
+}
+.attendanceControl input {
+  width: 60px;
+  padding: 1rem 0.4rem;
+  text-align: center;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  border: 1px solid #828282;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #333;
+  color: white;
+  &:focus {
+    border-color: rgba(0, 0, 255, 0.689);
+    outline: 1px solid rgba(0, 0, 255, 0.563);
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.33);
+    outline-offset: 2px;
+  }
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 2rem 0;
+  height: 60px;
+}
+
+.itemLeft,
+.itemRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+  min-height: 40px;
+}
+
+.itemLeft,
+.itemRight > * {
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: white;
+}
+
+.date {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.time {
+  color: #606060;
+  font-weight: 500;
+  display: block;
+}
+
+.btn {
+  width: 100%;
+  padding: 1rem;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-family: inherit;
+  font-weight: 600;
+  background-color: blue;
+
+  cursor: pointer;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: rgba(0, 0, 255, 0.835);
+    transition: background-color 0.2s;
+  }
+  &:active {
+    background-color: rgba(0, 0, 255, 0.95);
+  }
+}
+
+.error {
+  width: 100px;
+  text-align: center;
+  text-transform: capitalize;
+  color: rgba(255, 0, 0, 0.799);
+}
