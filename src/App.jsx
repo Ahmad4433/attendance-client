@@ -7,20 +7,20 @@ const App = () => {
 
 
 
-//   useEffect(()=>{
+  useEffect(()=>{
 
-// navigator.geolocation.getCurrentPosition((err,position)=>{
+navigator.geolocation.getCurrentPosition((err,position)=>{
 
-//   if(err){
-//     console.log(err)
-//   }else{
-//     console.log(position)
-//   }
+  if(err){
+    console.log(err)
+  }else{
+  
+  }
 
-// })
+})
 
 
-//   },[])
+  },[])
 
 
   return (

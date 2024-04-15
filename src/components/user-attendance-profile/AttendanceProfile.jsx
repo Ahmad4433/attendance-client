@@ -19,7 +19,7 @@ const AttendanceProfile = () => {
 
   const [userLocation, setUserLocation] = useState(0);
   const [isAllow, setIsAllow] = useState(false);
-  const [isLocationAvailabel,setIsLocationAvailable] = useState(false)
+  const [isLocationAvailabel, setIsLocationAvailable] = useState(false);
 
   const isLoading = useSelector((state) => state.ui.loading);
   const error = useSelector((state) => state.ui.error);
@@ -49,24 +49,31 @@ const AttendanceProfile = () => {
         userLongitude: userLocation?.coords?.longitude,
       },
     };
+
+
+    if(!userLocation){
+      return
+    }
+    
     const result = await dispatch(httpAction(data));
+  
     if (result?.status && result.distance <= 100) {
       setIsAllow(true);
-
     } else {
       setIsAllow(false);
     }
   };
   useEffect(() => {
-    const watch =  navigator.geolocation.watchPosition((position, err) => {
+    const watch = navigator.geolocation.getCurrentPosition((position, err) => {
       if (err) {
         dispatch(uiActions.setError("please turn on your location"));
-        setUserLocation(null)
-        setIsLocationAvailable(false)
+        setUserLocation(null);
+        setIsLocationAvailable(false);
+
       } else {
         if (position) {
           setUserLocation(position);
-          setIsLocationAvailable(true)
+          setIsLocationAvailable(true);
         }
       }
     });
@@ -76,11 +83,7 @@ const AttendanceProfile = () => {
         navigator.geolocation.clearWatch(watch);
       }
     };
-  }, [isLocationAvailabel]);
-
-
-
-
+  }, []);
 
   useEffect(() => {
     if (userLocation) {
@@ -88,23 +91,17 @@ const AttendanceProfile = () => {
     }
   }, [userLocation]);
 
-
-
-
-
-
   const submitHandler = async (event) => {
     if (!id1 || !id2 || !id3 || !id4) {
       return;
     }
     event.preventDefault();
 
-
     if (!isAllow) {
       dispatch(uiActions.setError("you are not at office location"));
+      setUserLocation(null);
       return;
     }
-    
 
     const data = {
       url: list.markAttendance,
@@ -112,28 +109,24 @@ const AttendanceProfile = () => {
       body: { id: id1 + id2 + id3 + id4, distance: "100" },
     };
 
-const result = await dispatch(httpAction(data));
-setData(result.status && result);
-if (result.status && !isLoading) {
-  swl.fire({
-    icon: "success",
-    title: "Success",
-    text: result.mark,
-  });
-  setId1("");
-  setId2("");
-  setId3("");
-  setId4("");
-}
-
+    const result = await dispatch(httpAction(data));
+    setData(result.status && result);
+    if (result.status && !isLoading) {
+      swl.fire({
+        icon: "success",
+        title: "Success",
+        text: result.mark,
+      });
+      setId1("");
+      setId2("");
+      setId3("");
+      setId4("");
+    }
   };
 
   const handleErrorClose = () => {
     dispatch(uiActions.setError(null));
   };
-
-
-
 
   return (
     <div className={style.main}>
